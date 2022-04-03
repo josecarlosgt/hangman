@@ -55,7 +55,9 @@
    ******************************************/
 
   /**
-  TBD
+  Draws the hangman figure.
+  
+  @param	{string} part A string representing the part of the hangman to draw
   
   @returns No value.
   */
@@ -119,7 +121,12 @@
   }
 
   /**
-  TBD
+  Generates the HTML for displaying a single letter in the game interface.
+  
+  @param	{string} symbol A string representing the letter to display.
+                          The symbol can be an empty string to display a blank
+                          space, which would symbolize a letter that has not been 
+                          guessed by the player.
   
   @returns No value.
   */
@@ -132,23 +139,36 @@
    ******************************************/  
 
   /**
-  X
-  
-  /**
-  TBD
+  Event handler for clicking a letter on the letters board. 
+
+  @param	{object} event An object representing the event. In this case, the event
+                         should correspond to a click on a letter button on the board.
   
   @returns No value.
   */
   function chooseLetter(event) {
+    // Get a reference to the DOM element that registered the event
     const letterBtn = event.currentTarget;
 
+    // CSS rule used to indicate the letter has been chosen by the user
     letterBtn.classList.add("letter-chosen");
 
+    /* YOU MAY CHANGE THE CODE IN THIS FUNCTION */
+
+    // Draw the corresponding hangman part and
+    // increment the GAME.step variable by one
     drawHangman(HANGMAN_STEPS[GAME.step++]);
 
+    // Check if the hangman is completed to display the end-game message
     if (undefined === HANGMAN_STEPS[GAME.step]) {
       document.querySelector("#game-over-msg").classList.remove("hide");
     }
+
+    /* As the GAME.step++ variables is always incremented by one, a way to check
+      if the hangman has been completed is by comparing the value of the HANGMAN_STEPS
+      at the index indicated by the GAME.step variable against undefined.
+      If the value of HANGMAN_STEPS at GAME.step is undefined, it means there are no
+      more parts to draw, and thus, the game should be over. */
   }
 
   // GAME START-OFF
@@ -158,10 +178,13 @@
 
   let wordHTML = "";
   for (let i = 0; i < WORD.length; i++) {
+    // Display an empty space for each letter of the word to guess
     wordHTML += getLetterHTML(SPACE);
   }
   document.querySelector('#word').innerHTML = wordHTML;
 
+  // Add the chooseLetter function as an event handler for each
+  // letter on the board
   for (let letterBtn of document.querySelectorAll(".letter")) {
     letterBtn.addEventListener('click', chooseLetter)
   }
