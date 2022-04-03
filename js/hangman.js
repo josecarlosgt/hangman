@@ -164,7 +164,7 @@
       document.querySelector("#game-over-msg").classList.remove("hide");
     }
 
-    /* As the GAME.step++ variables is always incremented by one, a way to check
+    /* As the GAME.step++ variable is always incremented by one, a way to check
       if the hangman has been completed is by comparing the value of the HANGMAN_STEPS
       at the index indicated by the GAME.step variable against undefined.
       If the value of HANGMAN_STEPS at GAME.step is undefined, it means there are no
