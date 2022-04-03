@@ -1,0 +1,2 @@
+# hangman
+A JavaScript implementation
